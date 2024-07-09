@@ -2,4 +2,45 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+<<<<<<< HEAD
+=======
+}
+.container {
+  width: 700px;
+  height: auto;
+  margin: 0 auto;
+  background-color: beige;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+}
+
+.products {
+  width: 200px;
+  height: 100%;
+  border: 1px solid greenyellow;
+}
+.products > img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul {
+  display: flex;
+  gap: 10px;
+}
+li {
+  border: 1px solid black;
+  list-style: none;
+  padding: 10px 20px;
+  cursor: pointer;
+>>>>>>> 805d7cb0d49ec56fa542df94f98df9b3e84de3ae
 }
