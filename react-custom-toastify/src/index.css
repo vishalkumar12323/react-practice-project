@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.toast {
+  @apply fixed z-50 max-w-md mx-auto p-4 mb-4 rounded shadow-md;
+}
+
+.toast-success {
+  @apply bg-green-500 text-white;
+}
+
+.toast-error {
+  @apply bg-red-500 text-white;
+}
+
+.toast-info {
+  @apply bg-blue-500 text-white;
+}
+
+.toast-warning {
+  @apply bg-orange-500 text-white;
+}
+
+.toast-top-left {
+  @apply top-0 left-0;
+}
+
+.toast-top-center {
+  @apply top-0 left-1/2 -translate-x-1/2;
+}
+
+.toast-top-right {
+  @apply top-0 right-0;
+}
+
+.toast-bottom-left {
+  @apply bottom-0 left-0;
+}
+
+.toast-bottom-center {
+  @apply bottom-0 left-1/2 -translate-x-1/2;
+}
+
+.toast-bottom-right {
+  @apply bottom-0 right-0;
+}
+
+.transform {
+  @apply transition duration-300 ease-in-out;
+}
+
+.transform-top-bottom {
+  @apply translate-y-full opacity-0;
+}
+
+.transform-top-bottom.toast-enter {
+  @apply translate-y-0 opacity-100;
+}
+
+.transform-top-bottom.toast-leave {
+  @apply translate-y-full opacity-0;
+}
+
+.transform-bottom-top {
+  @apply translate-y-0 opacity-0;
+}
+
+.transform-bottom-top.toast-enter {
+  @apply translate-y-full opacity-100;
+}
+
+.transform-bottom-top.toast-leave {
+  @apply translate-y-0 opacity-0;
+}
