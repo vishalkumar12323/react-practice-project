@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.info {
+  background: #0066ffe5;
+}
+
+.success {
+  background: #00ff00e5;
+}
+
+.warning {
+  background: #ffbb00f1;
+}
+
+.error {
+  background: #d8190cec;
+}
+
+.top-right {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+.top-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+.bottom-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+.bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
