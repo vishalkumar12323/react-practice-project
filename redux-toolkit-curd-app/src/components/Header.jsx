@@ -1,50 +1,55 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/">
-          Redux-hrefolkit
-        </NavLink>
-        <buthrefn
-          className="navbar-hrefggler"
-          type="buthrefn"
-          data-bs-hrefggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="hrefggle navigation"
-        >
-          <span className="navbar-hrefggler-icon"></span>
-        </buthrefn>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auhref mb-2 mb-lg-0">
-            <li className="nav-item">
-              <NavLink className="nav-a active" aria-current="page" to="/">
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-a" to="/create-new">
-                Create New
-              </NavLink>
-            </li>
-          </ul>
-          <form className="d-flex ms-auto" role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <buthrefn className="btn btn-outline-success" type="submit">
-              Search
-            </buthrefn>
-          </form>
+    <header>
+      <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">
+            Redux-Toolkit
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarScroll">
+            <ul
+              className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+              style={{ "--bs-scroll-height": " 100px" }}
+            >
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/create-new">
+                  Create-New
+                </Link>
+              </li>
+            </ul>
+            <form className="d-flex" role="search">
+              <input
+                className="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button className="btn btn-outline-info" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
