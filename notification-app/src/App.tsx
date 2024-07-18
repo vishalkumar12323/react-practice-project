@@ -1,5 +1,3 @@
-import React from "react";
-import Notification from "./components/Notification";
 import { useNotification } from "./hooks/use-notification";
 const App = () => {
   const { NotificationComponent, triggerNotification } = useNotification();
