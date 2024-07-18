@@ -1,0 +1,108 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.toast {
+  position: relative;
+  width: 300px;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1px;
+  box-shadow: 0 0px 5px 0px #fffffffa;
+}
+.info {
+  background: #296acce5;
+}
+
+.success {
+  background: #1b881be5;
+}
+
+.warning {
+  background: #e0b336f1;
+}
+
+.error {
+  background: #c2372dec;
+}
+
+.top-right {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.top-left {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+.top-center {
+  position: fixed;
+  top: 20px;
+  left: 40%;
+}
+.bottom-center {
+  position: fixed;
+  bottom: 20px;
+  left: 40%;
+}
+.bottom-left {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+.bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.notification {
+  margin-left: 4px;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  color: #ffff;
+  font-family: sans-serif;
+}
+.icon {
+  margin-left: 7px;
+  margin-top: 2px;
+}
+.close-icon {
+  cursor: pointer;
+  position: absolute;
+  right: 5px;
+  top: 15px;
+}
+
+.buttons {
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.btn {
+  font-size: 2rem;
+  text-transform: capitalize;
+  padding: 20px 25px;
+  cursor: pointer;
+}
+
+.fade {
+  animation: fade 0.5s ease-in-out;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

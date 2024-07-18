@@ -3,11 +3,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: #060114e3;
+  padding: 2rem 0;
+}
 .container {
   width: 700px;
   height: auto;
   margin: 0 auto;
-  background-color: beige;
+  background-color: #050011b4;
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr;
@@ -17,7 +21,8 @@
 .products {
   width: 200px;
   height: 100%;
-  border: 1px solid greenyellow;
+  border: 1px solid #0011ff;
+  color: white;
 }
 .products > img {
   width: 150px;
@@ -31,6 +36,10 @@
   justify-content: center;
   align-items: center;
 }
+.background {
+  background-color: #0099ffe3;
+  transition: all 0.5s linear;
+}
 ul {
   display: flex;
   gap: 10px;
@@ -40,4 +49,5 @@ li {
   list-style: none;
   padding: 10px 20px;
   cursor: pointer;
+  color: white;
 }
