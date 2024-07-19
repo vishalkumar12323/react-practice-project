@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { postData } from "../app/services/functions";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [info, setInfo] = useState({
-    name: "",
-    age: "",
-    email: "",
-    gender: "",
-    marriedStatus: false,
-    description: "",
+    title: "",
+    body: "",
+    userId: 0,
   });
 
   const handleOnChange = (e) => {
@@ -19,127 +21,98 @@ const CreatePost = () => {
       };
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postData(info));
+    setInfo({
+      title: "",
+      body: "",
+      userId: 0,
+    });
+    navigate("/");
+  };
   return (
     <>
       <div className="container w-50 mx-auto mt-4 p-5 bg-dark-subtle rounded-2 border border-2">
-        <div className="mb-3 ">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="enter name..."
-            name="name"
-            value={info.name}
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Age
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="enter age..."
-            name="age"
-            value={info.age}
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="name@example.com"
-            name="email"
-            value={info.email}
-            onChange={handleOnChange}
-          />
-        </div>
-
-        <div className="d-flex gap-3 mb-3">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="gender"
-              id="flexRadioDefault1"
-              value={info.gender}
-              onChange={handleOnChange}
-              defaultChecked
-            />
-            <label className="form-check-label" htmlFor="flexRadioDefault1">
-              Male
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3 ">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
+              Title
             </label>
-          </div>
-          <div className="form-check">
             <input
-              className="form-check-input"
-              type="radio"
-              name="gender"
-              id="flexRadioDefault2"
-              value={info.gender}
+              type="text"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder="enter title..."
+              name="title"
+              value={info.title}
               onChange={handleOnChange}
             />
-            <label className="form-check-label" htmlFor="flexRadioDefault2">
-              Female
-            </label>
           </div>
-        </div>
-        <div className="d-flex gap-3 mb-3">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="marriedStatus"
-              id="flexRadioDefault3"
-              value={info.marriedStatus}
-              defaultChecked
-            />
-            <label className="form-check-label" htmlFor="flexRadioDefault3">
-              Married
+          <div className="mb-3">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
+              Body
             </label>
-          </div>
-          <div className="form-check">
             <input
-              className="form-check-input"
-              type="radio"
-              name="marriedStatus"
-              value={info.marriedStatus}
+              type="text"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder="body..."
+              name="body"
+              value={info.body}
               onChange={handleOnChange}
-              id="flexRadioDefault4"
             />
-            <label className="form-check-label" htmlFor="flexRadioDefault4">
-              Unmarried
-            </label>
           </div>
-        </div>
+          <div className="mb-3">
+            <label htmlFor="exampleFormControlInput1" className="form-label">
+              UserId
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="exampleFormControlInput1"
+              placeholder="user-id"
+              name="userId"
+              value={info.userId}
+              onChange={handleOnChange}
+            />
+          </div>
 
-        <div className="mb-2">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            Example textarea
-          </label>
-          <textarea
-            className="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-            name="description"
-            value={info.description}
-            onChange={handleOnChange}
-          ></textarea>
-        </div>
+          {/* <div className="d-flex gap-3 mb-3">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="status"
+                id="flexRadioDefault1"
+                value={info.gender}
+                onChange={handleOnChange}
+                defaultChecked
+              />
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Completed
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="status"
+                id="flexRadioDefault2"
+                value={info.completed}
+                onChange={handleOnChange}
+              />
+              <label className="form-check-label" htmlFor="flexRadioDefault2">
+                Uncompleted
+              </label>
+            </div>
+          </div> */}
 
-        <div>
-          <button className="btn btn-info">Submit</button>
-        </div>
+          <div>
+            <button className="btn btn-info">Submit</button>
+          </div>
+        </form>
       </div>
     </>
   );

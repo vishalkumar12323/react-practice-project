@@ -3,6 +3,6 @@ import { actresSlice } from "./features/actresSlice";
 
 export const store = configureStore({
   reducer: {
-    actres: actresSlice.reducer,
+    app: actresSlice.reducer,
   },
 });
