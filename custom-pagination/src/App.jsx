@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
+import { Button, buttonVariants } from "./components/ui/button";
+import { cn } from "./libs/utils";
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 function App() {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
 
   const fetchProducts = async () => {
-    const res = await fetch(
-      `https://dummyjson.com/products/?limit=100&skip=${page * 10 - 10}`
-    );
+    const res = await fetch(`https://dummyjson.com/products/?limit=100`);
     const data = await res.json();
     setProducts(data.products);
     setTotalPage(data.total / 10);
@@ -20,27 +21,33 @@ function App() {
   };
   useEffect(() => {
     fetchProducts();
-  }, [page]);
+  }, []);
   return (
     <>
-      <div className="container">
+      <div className="grid grid-cols-3 gap-3 place-items-center max-w-screen-lg mx-auto">
         {products.length > 0 &&
-          products.map((pro, i) => (
-            <div key={pro.id} className="products">
+          products.slice((page - 1) * 10, page * 10).map((pro, i) => (
+            <div
+              key={pro.id}
+              className="products w-full flex justify-center flex-col-reverse border border-pink-500 p-3"
+            >
               <img src={pro.thumbnail} alt={pro.title} />
-              <span>{pro.title}</span>
+              <span className="text-center">{pro.title}</span>
             </div>
           ))}
       </div>
-      <div className="buttons">
-        <ul>
-          <li
+      <div className="w-full">
+        <ul className="flex justify-center items-center gap-3">
+          <Button
+            className={cn(
+              buttonVariants({ variant: "destructive", size: "lg" })
+            )}
             onClick={() => handlePagination(page - 1)}
-            style={{ opacity: page === 1 ? "0" : "1" }}
+            // style={{ opacity: page === 1 ? "0" : "1" }}
           >
-            ◀
-          </li>
-          {[...Array(totalPage)].map((_, i) => (
+            <ArrowBigLeft />
+          </Button>
+          {/* {[...Array(totalPage)].map((_, i) => (
             <li
               key={i + 1}
               onClick={() => handlePagination(i + 1)}
@@ -48,13 +55,16 @@ function App() {
             >
               {i + 1}
             </li>
-          ))}
-          <li
+          ))} */}
+          <Button
+            className={cn(
+              buttonVariants({ variant: "destructive", size: "lg" })
+            )}
             onClick={() => handlePagination(page + 1)}
-            style={{ opacity: page === totalPage ? "0" : "1" }}
+            // style={{ opacity: page === totalPage ? "0" : "1" }}
           >
-            ▶
-          </li>
+            <ArrowBigRight />
+          </Button>
         </ul>
       </div>
     </>
