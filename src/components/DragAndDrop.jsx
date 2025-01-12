@@ -1,24 +1,40 @@
 import { useState, useEffect, useRef } from "react";
 import { MdUpload } from "react-icons/md";
 
-export const DragAndDrop = () => {
+export const FileDropZone = () => {
   const [files, setFile] = useState([]);
-  const [apiResponse, setApiResponse] = useState({ msg: "", length: 0 });
-  const [error, setError] = useState("");
 
   const inputRef = useRef(null);
 
-  async function handleChange(e) {
+  function handleInputChange(e) {
     const selectedFiles = e.target.files;
     setFile([...selectedFiles]);
   }
 
-  function handleFileUpload() {
+  function handleFileUpload(e) {
+    e.stopPropagation();
     if (inputRef.current) {
-      console.log(inputRef.current.click());
+      inputRef.current.click();
     }
   }
 
+  function handleDrop(e) {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+
+    if (inputRef.current) {
+      const dataTransfer = new DataTransfer();
+      Array.from(files).forEach((file) => dataTransfer.items.add(file));
+      inputRef.current.files = dataTransfer.files;
+
+      const changeEvent = new Event("change", { bubbles: true });
+      inputRef.current.dispatchEvent(changeEvent);
+    }
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+  }
   useEffect(() => {
     console.log(files);
   }, [files]);
@@ -30,34 +46,14 @@ export const DragAndDrop = () => {
         </div>
         <div
           className="upload_btn_box"
-          onDrop={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            inputRef.current && inputRef.current.click();
-          }}
-          onDragOver={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // inputRef.current && inputRef.current.click();
-          }}
-          onDragLeave={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // inputRef.current && inputRef.current.click();
-          }}
-          onDragEnter={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // inputRef.current && inputRef.current.click();
-          }}
-          onClick={() => {
-            inputRef.current && inputRef.current.click();
-          }}>
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onClick={handleFileUpload}>
           <input
             ref={inputRef}
             type="file"
             className="input_box"
-            onChange={handleChange}
+            onChange={handleInputChange}
             accept="image/jpeg, image/png, image/webp"
             id="id"
           />

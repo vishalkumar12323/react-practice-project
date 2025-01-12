@@ -48,8 +48,9 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  visibility: hidden;
   cursor: pointer;
+  z-index: 9999;
+  visibility: hidden;
 }
 .upload_btn_box {
   width: 100%;
