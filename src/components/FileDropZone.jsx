@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { MdUpload } from "react-icons/md";
 
-export const FileDropZone = () => {
+export const FileDropZone = (props) => {
   const [files, setFile] = useState([]);
 
   const inputRef = useRef(null);
@@ -36,14 +36,24 @@ export const FileDropZone = () => {
     e.preventDefault();
   }
   useEffect(() => {
-    console.log(files);
+    if (files && files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        props.setBackground(e.target.result);
+      };
+
+      reader.readAsDataURL(files[0]);
+    }
   }, [files]);
   return (
     <div className="container">
-      <div className="upload_box">
-        <div className="img_box">
-          <img src="/upload-icon.png" alt="upload image" className="img" />
-        </div>
+      <div
+        className={`upload_box`}
+        style={
+          !props.background
+            ? { boxShadow: "1px 1px 10px 5px #c4c1c1" }
+            : { border: "1px solid #929292", backgroundColor: "#ebebebb3" }
+        }>
         <div
           className="upload_btn_box"
           onDrop={handleDrop}
@@ -54,7 +64,7 @@ export const FileDropZone = () => {
             type="file"
             className="input_box"
             onChange={handleInputChange}
-            accept="image/jpeg, image/png, image/webp"
+            accept="image/jpeg, image/png, image/webp, image/svg+xml"
             id="id"
           />
           <button className="btn" type="button" onClick={handleFileUpload}>
