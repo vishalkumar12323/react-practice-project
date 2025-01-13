@@ -3,6 +3,7 @@ import { MdUpload } from "react-icons/md";
 
 export const FileDropZone = (props) => {
   const [files, setFile] = useState([]);
+  const [backgroundCount, setBackgroundCount] = useState(0);
 
   const inputRef = useRef(null);
 
@@ -42,11 +43,36 @@ export const FileDropZone = (props) => {
         props.setBackground(e.target.result);
       };
 
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(files[backgroundCount]);
     }
-  }, [files]);
+  }, [files, backgroundCount]);
   return (
     <div className="container">
+      {files && files.length > 0 && (
+        <div className="previous">
+          <button
+            style={
+              backgroundCount <= 0
+                ? {
+                    cursor: "not-allowed",
+                    backgroundColor: "#aaaaaa",
+                  }
+                : null
+            }
+            disabled={backgroundCount <= 0}
+            onClick={() => {
+              if (backgroundCount <= files.length - 1 && backgroundCount >= 0) {
+                setBackgroundCount(backgroundCount - 1);
+              } else {
+                return;
+              }
+            }}
+            className="previous_btn">
+            <span>Previous image</span>
+          </button>
+        </div>
+      )}
+
       <div
         className={`upload_box`}
         style={
@@ -66,6 +92,7 @@ export const FileDropZone = (props) => {
             onChange={handleInputChange}
             accept="image/jpeg, image/png, image/webp, image/svg+xml"
             id="id"
+            multiple
           />
           <button className="btn" type="button" onClick={handleFileUpload}>
             {" "}
@@ -75,6 +102,31 @@ export const FileDropZone = (props) => {
           <span className="text">or drag and drop it here</span>
         </div>
       </div>
+
+      {files && files.length > 0 && (
+        <div className="next">
+          <button
+            style={
+              backgroundCount >= files.length - 1
+                ? {
+                    cursor: "not-allowed",
+                    backgroundColor: "#aaaaaa",
+                  }
+                : null
+            }
+            disabled={backgroundCount >= files.length - 1}
+            onClick={() => {
+              if (files.length - 1 > backgroundCount) {
+                setBackgroundCount(backgroundCount + 1);
+              } else {
+                return;
+              }
+            }}
+            className="next_btn">
+            <span>Next image</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
