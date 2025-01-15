@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { MdUpload } from "react-icons/md";
+import "../styles/filedropzone.css";
 
-export const FileDropZone = (props) => {
+export const FileDropZone = () => {
+  const [background, setBackground] = useState();
   const [files, setFile] = useState([]);
   const [backgroundCount, setBackgroundCount] = useState(0);
 
@@ -40,93 +42,109 @@ export const FileDropZone = (props) => {
     if (files && files.length > 0) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        props.setBackground(e.target.result);
+        setBackground(e.target.result);
       };
 
       reader.readAsDataURL(files[backgroundCount]);
     }
   }, [files, backgroundCount]);
   return (
-    <div className="container">
-      {files && files.length > 0 && (
-        <div className="previous">
-          <button
-            style={
-              backgroundCount <= 0
-                ? {
-                    cursor: "not-allowed",
-                    backgroundColor: "#aaaaaa",
-                  }
-                : null
+    <main
+      style={
+        background
+          ? {
+              backgroundImage: `url(${background})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
             }
-            disabled={backgroundCount <= 0}
-            onClick={() => {
-              if (backgroundCount <= files.length - 1 && backgroundCount >= 0) {
-                setBackgroundCount(backgroundCount - 1);
-              } else {
-                return;
+          : { background: "transparent" }
+      }
+      className="parent">
+      <div className="container">
+        {files && files.length > 0 && (
+          <div className="previous">
+            <button
+              style={
+                backgroundCount <= 0
+                  ? {
+                      cursor: "not-allowed",
+                      backgroundColor: "#aaaaaa",
+                    }
+                  : null
               }
-            }}
-            className="previous_btn">
-            <span>Previous image</span>
-          </button>
-        </div>
-      )}
+              disabled={backgroundCount <= 0}
+              onClick={() => {
+                if (
+                  backgroundCount <= files.length - 1 &&
+                  backgroundCount >= 0
+                ) {
+                  setBackgroundCount(backgroundCount - 1);
+                } else {
+                  return;
+                }
+              }}
+              className="previous_btn">
+              <span>Previous image</span>
+            </button>
+          </div>
+        )}
 
-      <div
-        className={`upload_box`}
-        style={
-          !props.background
-            ? { boxShadow: "1px 1px 10px 5px #c4c1c1" }
-            : { border: "1px solid #929292", backgroundColor: "#ebebebb3" }
-        }>
         <div
-          className="upload_btn_box"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onClick={handleFileUpload}>
-          <input
-            ref={inputRef}
-            type="file"
-            className="input_box"
-            onChange={handleInputChange}
-            accept="image/jpeg, image/png, image/webp, image/svg+xml"
-            id="id"
-            multiple
-          />
-          <button className="btn" type="button" onClick={handleFileUpload}>
-            {" "}
-            <MdUpload size={20} /> <span>Upload files</span>{" "}
-          </button>
+          className={`upload_box`}
+          style={
+            !background
+              ? { boxShadow: "1px 1px 10px 5px #c4c1c1" }
+              : { border: "1px solid #929292", backgroundColor: "#ebebebb3" }
+          }>
+          <div
+            className="upload_btn_box"
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onClick={handleFileUpload}>
+            <input
+              ref={inputRef}
+              type="file"
+              className="input_box"
+              onChange={handleInputChange}
+              accept="image/jpeg, image/png, image/webp, image/svg+xml"
+              id="id"
+              multiple
+            />
+            <button className="btn" type="button" onClick={handleFileUpload}>
+              {" "}
+              <MdUpload size={20} /> <span>Upload files</span>{" "}
+            </button>
 
-          <span className="text">or drag and drop it here</span>
+            <span className="text">or drag and drop it here</span>
+          </div>
         </div>
-      </div>
 
-      {files && files.length > 0 && (
-        <div className="next">
-          <button
-            style={
-              backgroundCount >= files.length - 1
-                ? {
-                    cursor: "not-allowed",
-                    backgroundColor: "#aaaaaa",
-                  }
-                : null
-            }
-            disabled={backgroundCount >= files.length - 1}
-            onClick={() => {
-              if (files.length - 1 > backgroundCount) {
-                setBackgroundCount(backgroundCount + 1);
-              } else {
-                return;
+        {files && files.length > 0 && (
+          <div className="next">
+            <button
+              style={
+                backgroundCount >= files.length - 1
+                  ? {
+                      cursor: "not-allowed",
+                      backgroundColor: "#aaaaaa",
+                    }
+                  : null
               }
-            }}
-            className="next_btn">
-            <span>Next image</span>
-          </button>
-        </div>
-      )}
-    </div>
+              disabled={backgroundCount >= files.length - 1}
+              onClick={() => {
+                if (files.length - 1 > backgroundCount) {
+                  setBackgroundCount(backgroundCount + 1);
+                } else {
+                  return;
+                }
+              }}
+              className="next_btn">
+              <span>Next image</span>
+            </button>
+          </div>
+        )}
+      </div>
+    </main>
   );
 };

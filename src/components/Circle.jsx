@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import "../styles/circle.css";
 
-export function Circle() {
+export const Circle = () => {
   const [circlePosition, setCirclePosition] = useState({
     top: 0,
     left: 0,
@@ -22,4 +23,4 @@ export function Circle() {
         }}></div>
     </>
   );
-}
+};
