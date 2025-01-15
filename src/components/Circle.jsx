@@ -1,0 +1,25 @@
+import { useEffect, useState } from "react";
+
+export function Circle() {
+  const [circlePosition, setCirclePosition] = useState({
+    top: 0,
+    left: 0,
+  });
+
+  useEffect(() => {
+    document.getElementById("root").addEventListener("mousemove", (e) => {
+      setCirclePosition({ top: e.clientY, left: e.clientX });
+    });
+  }, [circlePosition.top, circlePosition.left]);
+
+  return (
+    <>
+      <div
+        className="circle"
+        style={{
+          top: circlePosition.top - 25,
+          left: circlePosition.left - 25,
+        }}></div>
+    </>
+  );
+}
