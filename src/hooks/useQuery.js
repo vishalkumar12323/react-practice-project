@@ -8,9 +8,15 @@ export const useQuery = ({ url }) => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(url, { method: "GET" });
-        const data = await response.json();
+        const response = await fetch(url, {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
+        const data = await response.json();
         setData(data);
       } catch (err) {
         console.log(err);
@@ -19,6 +25,6 @@ export const useQuery = ({ url }) => {
         setLoading(false);
       }
     })();
-  }, [url]);
+  }, []);
   return { data, loading, reqError };
 };
