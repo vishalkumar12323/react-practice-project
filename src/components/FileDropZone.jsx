@@ -61,7 +61,7 @@ export const FileDropZone = () => {
           : { background: "transparent" }
       }
       className="parent">
-      <div className="container">
+      <div className="filedropzon_container">
         {files && files.length > 0 && (
           <div className="previous">
             <button
