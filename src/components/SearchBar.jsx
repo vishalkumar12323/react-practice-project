@@ -68,15 +68,22 @@ export const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
 
-    setData(
-      originalData.filter((d) =>
+    const timeId = setTimeout(() => {
+      const filtered = originalData.filter((d) =>
         d.name.toLowerCase().includes(value.toLowerCase())
-      )
-    );
+      );
+
+      setData(filtered);
+      setFilteredData([]);
+
+      setTimeout(() => setFilteredData(filtered), 300);
+    }, 300);
+    return () => clearTimeout(timeId);
   };
 
   useEffect(() => {
@@ -88,6 +95,7 @@ export const SearchBar = () => {
 
       const data = await resposne.json();
       setOriginalData(data);
+      setFilteredData(data);
       setData(data);
     })();
   }, []);
@@ -111,10 +119,10 @@ export const SearchBar = () => {
       </form>
 
       <div className="query_result">
-        {data &&
-          data.length > 0 &&
-          data.map((d) => (
-            <div className="card" key={d.email}>
+        {filteredData &&
+          filteredData.length > 0 &&
+          filteredData.map((d) => (
+            <div key={d.email} className="card">
               <p>
                 <strong>name:</strong> {d.name}
               </p>
@@ -122,10 +130,7 @@ export const SearchBar = () => {
                 <strong>email:</strong> {d.email}
               </p>
               <p>
-                <strong>phone no.</strong> {d.phone}
-              </p>
-              <p>
-                <strong>website:</strong> {d.website}
+                <strong>website</strong> {d.website}
               </p>
             </div>
           ))}
