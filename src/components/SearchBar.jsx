@@ -67,18 +67,16 @@ import "../styles/search-bar.css";
 export const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
+  const [originalData, setOriginalData] = useState([]);
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-  };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    setData((preData) => {
-      return preData.filter(
-        (d) => d.name.toLowerCase() === query.toLowerCase()
-      );
-    });
+    setData(
+      originalData.filter((d) =>
+        d.name.toLowerCase().includes(value.toLowerCase())
+      )
+    );
   };
 
   useEffect(() => {
@@ -89,12 +87,13 @@ export const SearchBar = () => {
       );
 
       const data = await resposne.json();
+      setOriginalData(data);
       setData(data);
     })();
   }, []);
   return (
     <div className="search_container">
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <div className="input_box">
           <input
             type="text"
