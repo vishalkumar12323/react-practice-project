@@ -1,5 +1,10 @@
 import { OTPInputForm } from "./components/Otp";
 
 export const App = () => {
-  return <OTPInputForm otpLength={4} />;
+  const handleOnSubmit = (otp, event) => {
+    event.preventDefault();
+    const combinedOTP = otp.join("");
+    console.log(combinedOTP);
+  };
+  return <OTPInputForm otpLength={6} onSubmit={handleOnSubmit} />;
 };
