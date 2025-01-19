@@ -1,5 +1,5 @@
-import { SearchBar } from "./components/SearchBar";
+import { OTPInputForm } from "./components/Otp";
 
-export function App() {
-  return <SearchBar />;
-}
+export const App = () => {
+  return <OTPInputForm otpLength={4} />;
+};
