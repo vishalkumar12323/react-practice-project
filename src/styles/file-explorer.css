@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: cursive;
+}
+
+body {
+  background-color: #1e1e1e !important;
+  color: aliceblue !important;
+}
+.file-explorer {
+  width: 300px;
+  padding: 8px 10px;
+  transition: all 0.3s linear;
+}
+
+.file-list {
+  list-style: none;
+  user-select: none;
+}
+.file-list li {
+  width: 100%;
+  height: 40px;
+  background-color: #69696957;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-buttons {
+  display: flex;
+  gap: 10px;
+  margin-right: 10px;
+}
+/* .list-buttons {
+  display: none;
+} */
+.file-list .folder:hover {
+  background-color: #4a4a4a84;
+  box-shadow: 0px 0px 4px 0px #3c3c3c;
+}
+.file-list .folder:hover .list-buttons {
+  display: block;
+}
+
+.file-list .file:hover {
+  background-color: #4a4a4a84;
+  border-radius: 5px;
+  box-shadow: 0px 0px 4px 0px #3c3c3c;
+}
+.file-list .file:hover .list-buttons {
+  display: block;
+}
+
+.input {
+  width: 100%;
+  height: 35px;
+  padding: 0 5px;
+  background-color: white;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 4px 0px #3c3c3c;
+}
+
+.rename-input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 150px;
+}

@@ -1,10 +1,5 @@
-import { OTPInputForm } from "./components/Otp";
+import { CommentLayout } from "./components/Comment";
 
 export const App = () => {
-  const handleOnSubmit = (otp, event) => {
-    event.preventDefault();
-    const combinedOTP = otp.join("");
-    console.log(combinedOTP);
-  };
-  return <OTPInputForm otpLength={6} onSubmit={handleOnSubmit} />;
+  return <CommentLayout />;
 };

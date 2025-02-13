@@ -1,44 +1,36 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../styles/otp.css";
-
-export const OTPInputForm = ({ otpLength, onSubmit }) => {
+export const OTPInputs = ({ otpLength, onSubmit }) => {
   const [otp, setOtp] = useState([...Array(otpLength).fill("")]);
   const inputRefs = useRef([]);
 
-  const handleChange = (index, event) => {
+  const handleOnChange = (index, event) => {
     const value = event.target.value;
 
-    if (isNaN(value)) return; // Prevent non-numeric input
+    if (isNaN(value)) return;
     const newOtp = [...otp];
     newOtp[index] = value.substring(value.length - 1);
     setOtp(newOtp);
 
-    // Focus on the next empty input field.
     if (value) {
-      const nextEmptyIndex = newOtp.findIndex(
-        (val, idx) => !val && idx > index
-      );
+      const nextEmptyIndex = newOtp.findIndex((value, i) => {
+        return value === "" && i > index;
+      });
 
-      if (nextEmptyIndex !== -1 && inputRefs.current[nextEmptyIndex]) {
+      if (nextEmptyIndex > -1 && inputRefs.current[nextEmptyIndex]) {
         inputRefs.current[nextEmptyIndex].focus();
       }
     }
   };
-
-  const handleClick = (index) => {
+  const handleOnClick = (index) => {
     inputRefs.current[index].setSelectionRange(1, 1);
 
     if (index > 0 && !otp[index - 1]) {
       inputRefs.current[otp.indexOf("")].focus();
     }
   };
-  const handleKeyDown = (index, event) => {
-    if (
-      event.key === "Backspace" &&
-      !otp[index] &&
-      index > 0 &&
-      inputRefs.current[index - 1]
-    ) {
+  const handleKeyPress = (index, event) => {
+    if (event.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1].focus();
     }
   };
@@ -48,30 +40,29 @@ export const OTPInputForm = ({ otpLength, onSubmit }) => {
       inputRefs.current[0].focus();
     }
   }, []);
+  useEffect(() => {
+    console.log(otp);
+  }, [otp]);
   return (
-    <div className="otp_container">
-      <h4>Enter The OTP</h4>
-      <form onSubmit={(e) => onSubmit(otp, e)}>
+    <>
+      <div className="otp_container">
         <div className="otp_box">
           {otp.map((value, index) => {
             return (
               <input
-                type="text"
-                ref={(input) => (inputRefs.current[index] = input)}
-                value={value}
-                key={index}
-                onChange={(e) => handleChange(index, e)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                onClick={(e) => handleClick(index, e)}
                 className="otp_input"
+                ref={(input) => (inputRefs.current[index] = input)}
+                type="text"
+                key={index}
+                value={value}
+                onChange={(e) => handleOnChange(index, e)}
+                onClick={() => handleOnClick(index)}
+                onKeyDown={(e) => handleKeyPress(index, e)}
               />
             );
           })}
         </div>
-        <button type="submit" className="button">
-          Submit
-        </button>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
