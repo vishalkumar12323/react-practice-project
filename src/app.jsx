@@ -1,5 +1,6 @@
-import { CommentLayout } from "./components/Comment";
+import { LikeButton } from "./components/LikeButton";
 
 export const App = () => {
-  return <CommentLayout />;
+
+  return <LikeButton/>
 };
