@@ -1,6 +1,5 @@
-import { LikeButton } from "./components/LikeButton";
+import { Login } from "./components/Login";
 
 export const App = () => {
-
-  return <LikeButton/>
+  return <Login />;
 };
