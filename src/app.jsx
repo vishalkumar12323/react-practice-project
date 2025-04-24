@@ -1,5 +1,5 @@
-import { Login } from "./components/Login";
+import AuthenticateEmail from "./components/verify-email";
 
 export const App = () => {
-  return <Login />;
+  return <AuthenticateEmail />;
 };

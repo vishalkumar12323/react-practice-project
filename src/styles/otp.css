@@ -1,15 +1,9 @@
-.otp_container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 10px;
-}
-
 .otp_box {
+  width: 100%;
   display: flex;
-  gap: 10px;
+  gap: 18px;
+  margin-bottom: 20px;
+  justify-content: center;
 }
 .otp_input {
   width: 45px;

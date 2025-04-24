@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import "../styles/otp.css";
-export const OTPInputs = ({ otpLength, onSubmit }) => {
-  const [otp, setOtp] = useState([...Array(otpLength).fill("")]);
+export const OTPInputs = ({ otp, setOtp }) => {
   const inputRefs = useRef([]);
 
   const handleOnChange = (index, event) => {
@@ -40,28 +39,23 @@ export const OTPInputs = ({ otpLength, onSubmit }) => {
       inputRefs.current[0].focus();
     }
   }, []);
-  useEffect(() => {
-    console.log(otp);
-  }, [otp]);
   return (
     <>
-      <div className="otp_container">
-        <div className="otp_box">
-          {otp.map((value, index) => {
-            return (
-              <input
-                className="otp_input"
-                ref={(input) => (inputRefs.current[index] = input)}
-                type="text"
-                key={index}
-                value={value}
-                onChange={(e) => handleOnChange(index, e)}
-                onClick={() => handleOnClick(index)}
-                onKeyDown={(e) => handleKeyPress(index, e)}
-              />
-            );
-          })}
-        </div>
+      <div className="otp_box">
+        {otp.map((value, index) => {
+          return (
+            <input
+              className="otp_input"
+              ref={(input) => (inputRefs.current[index] = input)}
+              type="text"
+              key={index}
+              value={value}
+              onChange={(e) => handleOnChange(index, e)}
+              onClick={() => handleOnClick(index)}
+              onKeyDown={(e) => handleKeyPress(index, e)}
+            />
+          );
+        })}
       </div>
     </>
   );
